@@ -292,10 +292,12 @@ or to fetch and merge locally
 
 - Now that we’ve fetched the origin master branch, we can update our local master branch with the latest changes made on origin/master branch.
 Merge the remote master branch to local master.
+
       $ git merge origin/master
 
 
-- Another way to fetch and merge 
+- Another way to fetch and merge
+  
       $ git pull origin master
 
 
