@@ -301,4 +301,103 @@ Merge the remote master branch to local master.
 
 
 
+## Fork
+
+click Fork-clone it to the local -make changes- either have for u or give a pull request.
+
+
+## Rebasing
+
+- to make sure all caught up with the latest changes.
+- to do so ,
+#### can merge the master branch:
+-Each commit has a unique identifier which is a hash that contains info abt commits that makes us to interact with specific commits.             
+
+      $ git merge master
+
+- in merge, these hash are not modified. copied as it is while merging.
+
+
+
+#### or rebase branches.
+
+      $ git rebase master
+
+- in rebase, commits are copied from one branch to another. so new copied cpmmits are created. here git history id is modified. can be a pblm to check later.
+
+#### so use interactive rebase
+
+- specify which commits needed to be updated along with previous commits.
+
+      $ git rebase -i HEAD~4
+- here last 4 changes can be commited using HEAD~4
+
+
+
+- Let's pull all the changes from remote to our local master branch.
+
+      $ git checkout master; git pull origin master
+      Switched to branch 'master'
+      $ git log --oneline
+       display all commits
+
+      $ git checkout mylocalbranch 
+
+- go to the specific mylocalbranch where the commits are made in our local. then give 
+
+      $ git rebase master
+
+- so that whatever changes happened  after this branch commit can be copied into the local.  now check git log . all the changes are now in the local branch.
+
+- However we do not want multiple commits for the same story. we would like to squash all the commits into a single commit.
+      
+      $ git rebase -i HEAD~3
+
+ -Run: git rebase -i HEAD~3 command after that it will open with the default editor. Change the other lines except the first(last commit in the local branch) to use squash instead of pick.     
+- pick 34ee77e Add first draft of hare-and-tortoise story 
+- squash e4f2dfc Update hare-and-tortoise
+- squash a73e63b Finish hare-and-tortoise
+
+
+
+## Cherry Picking
+
+- to pick certain changes from one branch and apply it to ours.
+      
+       $ git cherry-pick <commit hash>
+       $ git cherry-pick <hash1> <hash 2>... <commit hash n>
+
+
+## Error handling
+
+ ### Revert:
+ - git revert as a tool for undoing committed changes
+         $ git revert <commit id>  -->
+
+### Reset
+- git reset HEAD is for undoing uncommitted changes
+
+         $ git reset --hard HEAD~3  --> last 3 commits
+
+- Soft flag (--soft) of the git reset command can be used to retain changes that were made on target commit after the reset operation.
+
+- hard flag (--hard) of git reset command can be used to drop changes that were made on target commit after the reset operation
+
+## Stashing
+- stash all the files in the working area before commit. commit all at once.
+
+            $ git stash   
+                 --> to stack it without commiting
+            $ git stash pop 
+                --> to take it out for working. last come first served(Pop)
+            $ git stash list
+                --> to list the files in the stash.
+            $ git stash show stash@{0} 
+                --> to figure out what files are stashed in which of these stashes.
+
+## Reflog
+
+- undo the reset, merge, all actions
+            $ git reflog
+
 
